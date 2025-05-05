@@ -67,6 +67,35 @@ public class CommentService {
         }
         return comments;
     }
+    
+    // Get comment by video ID
+    public List<Comment> getCommentsByVideoId(int videoId) {
+        List<Comment> comments = new ArrayList<>();
+        String query = "SELECT * FROM comment_details_view WHERE video_id = ? ORDER BY commented_at DESC";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+
+            stmt.setInt(1, videoId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Comment comment = new Comment();
+                comment.setCommentId(rs.getInt("comment_id"));
+                comment.setVideoId(videoId);
+                comment.setContent(rs.getString("content"));
+                comment.setCommentedAt(rs.getString("commented_at"));
+                comment.setCommenter(rs.getString("commenter"));
+                comment.setVideoTitle(rs.getString("video_title")); // Optional
+                comments.add(comment);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return comments;
+    }
 
     // Update Comment (base table)
     public boolean updateComment(Comment comment) {
@@ -88,6 +117,20 @@ public class CommentService {
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    // Delete Comment (only if it belongs to the user)
+    public boolean deleteComment(int commentId, int userId) {
+        String query = "DELETE FROM comments WHERE comment_id = ? AND user_id = ?";
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, commentId);
+            stmt.setInt(2, userId);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

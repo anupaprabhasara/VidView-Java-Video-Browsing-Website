@@ -32,7 +32,8 @@ CREATE TABLE admins (
 
 INSERT INTO admins (full_name, email, password) VALUES
 ('Admin One', 'admin1@example.com', 'adminpass1'),
-('Admin Two', 'admin2@example.com', 'adminpass2');
+('Admin Two', 'admin2@example.com', 'adminpass2'),
+('Admin Three', 'admin3@example.com', 'adminpass3');
 
 -- ========================================
 -- 4. Table: videos
@@ -49,8 +50,20 @@ CREATE TABLE videos (
 
 INSERT INTO videos (title, description, youtube_url, uploaded_by) VALUES
 ('Java Tutorial for Beginners', 'Learn Java basics with this video.', 'https://www.youtube.com/watch?v=eIrMbAQSU34', 1),
-('Servlets Crash Course', 'Understand Java Servlets step by step.', 'https://www.youtube.com/watch?v=5u7b4FzHUNc', 2),
-('HTML + CSS Full Course', 'Front-end skills for Java developers.', 'https://www.youtube.com/watch?v=mU6anWqZJcc', 1);
+('HTML + CSS Full Course', 'Front-end skills for Java developers.', 'https://www.youtube.com/watch?v=mU6anWqZJcc', 1),
+('JavaScript Fundamentals', 'Master the basics of JavaScript programming.', 'https://www.youtube.com/watch?v=upDLs1sn7g4', 2),
+('Spring Boot Tutorial', 'Create REST APIs with Spring Boot.', 'https://www.youtube.com/watch?v=vtPkZShrvXQ', 1),
+('MySQL Full Course', 'Learn MySQL from scratch in one video.', 'https://www.youtube.com/watch?v=7S_tz1z_5bA', 3),
+('Git and GitHub Crash Course', 'Version control using Git and GitHub.', 'https://www.youtube.com/watch?v=RGOj5yH7evk', 2),
+('Responsive Web Design', 'Build responsive websites with HTML/CSS.', 'https://www.youtube.com/watch?v=srvUrASNj0s', 1),
+('Object Oriented Programming in Java', 'Understand OOP concepts in Java.', 'https://www.youtube.com/watch?v=2oFKNL7vYV8', 3),
+('Node.js Crash Course', 'Introduction to server-side JavaScript.', 'https://www.youtube.com/watch?v=fBNz5xF-Kx4', 1),
+('Data Structures in Java', 'Learn essential data structures using Java.', 'https://www.youtube.com/watch?v=RBSGKlAvoiM', 3),
+('REST API Design Best Practices', 'Designing scalable RESTful APIs.', 'https://www.youtube.com/watch?v=VVn9OG9nfH0', 2),
+('AJAX and Fetch API Tutorial', 'Make asynchronous web requests in JavaScript.', 'https://www.youtube.com/watch?v=cuEtnrL9-H0', 1),
+('Java Collections Framework', 'Detailed overview of Java collections.', 'https://www.youtube.com/watch?v=K1iu1kXkVoA', 1),
+('React.js Crash Course', 'Get started with React for frontend.', 'https://www.youtube.com/watch?v=w7ejDZ8SWv8', 3),
+('Tailwind CSS Crash Course', 'Style websites using Tailwind.', 'https://www.youtube.com/watch?v=UBOj6rqRUME', 1);
 
 -- ========================================
 -- 5. Table: comments
