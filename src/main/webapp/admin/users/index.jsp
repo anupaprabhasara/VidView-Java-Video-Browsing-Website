@@ -29,19 +29,14 @@
     <!-- Content -->
     <main class="flex-1 p-6 space-y-6">
 
-      <!-- Header Row -->
-      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-        <a href="${pageContext.request.contextPath}/admin/user?action=create"
-           class="flex items-center gap-2 px-5 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-semibold transition">
-          <i class="fas fa-user-plus"></i> Add User
-        </a>
-
-        <div class="relative w-full md:w-1/3">
-          <input id="search" type="text" placeholder="Search users..."
-                 class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-sky-500 focus:outline-none text-white">
-          <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-        </div>
-      </div>
+      <!-- Header Row (Only Search - Right Aligned) -->
+	  <div class="flex justify-end">
+	    <div class="relative w-full md:w-1/3">
+	      <input id="search" type="text" placeholder="Search users..."
+	             class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-sky-500 focus:outline-none text-white">
+	      <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+	    </div>
+	  </div>
 
       <!-- Users Table -->
       <div class="overflow-x-auto bg-gray-900 shadow-lg rounded-xl border border-gray-700">
@@ -55,7 +50,7 @@
               <th class="px-6 py-4 text-center">Actions</th>
             </tr>
           </thead>
-          <tbody class="text-gray-200">
+          <tbody id="table" class="text-gray-200">
             <c:choose>
               <c:when test="${not empty users}">
                 <c:forEach var="user" items="${users}">
@@ -65,14 +60,10 @@
                     <td class="px-6 py-4">${user.email}</td>
                     <td class="px-6 py-4">${user.createdAt}</td>
                     <td class="px-6 py-4 text-center space-x-4">
-                      <a href="${pageContext.request.contextPath}/admin/user?action=edit&id=${user.userId}"
-                         class="text-sky-400 hover:text-sky-500">
-                        <i class="fas fa-edit"></i>
-                      </a>
                       <a href="${pageContext.request.contextPath}/admin/user?action=delete&id=${user.userId}"
                          onclick="return confirm('Are you sure you want to delete this user?');"
                          class="text-red-500 hover:text-red-600">
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="fas fa-trash-alt"></i> Delete
                       </a>
                     </td>
                   </tr>
@@ -92,5 +83,6 @@
 
   <!-- Scripts -->
   <%@ include file="../partials/script.jsp" %>
+  
 </body>
 </html>

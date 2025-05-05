@@ -29,10 +29,14 @@
     <!-- Content -->
     <main class="flex-1 p-6 space-y-6">
 
-      <!-- Title -->
-      <div class="flex justify-between items-center">
-        <h1 class="text-2xl font-semibold text-sky-400"><i class="fas fa-flag mr-2"></i> Reported Videos</h1>
-      </div>
+      <!-- Header Row (Only Search - Right Aligned) -->
+	  <div class="flex justify-end">
+	    <div class="relative w-full md:w-1/3">
+	      <input id="search" type="text" placeholder="Search reports..."
+	             class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-sky-500 focus:outline-none text-white">
+	      <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+	    </div>
+	  </div>
 
       <!-- Reports Table -->
       <div class="overflow-x-auto bg-gray-900 shadow-lg rounded-xl border border-gray-700">
@@ -47,7 +51,7 @@
               <th class="px-6 py-4 text-center">Action</th>
             </tr>
           </thead>
-          <tbody class="text-gray-200">
+          <tbody id="table" class="text-gray-200">
             <c:choose>
               <c:when test="${not empty reports}">
                 <c:forEach var="report" items="${reports}">
@@ -61,7 +65,7 @@
                       <a href="${pageContext.request.contextPath}/admin/report?action=delete&id=${report.reportId}"
                          onclick="return confirmDelete(this.href);"
                          class="text-red-500 hover:text-red-600">
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="fas fa-trash-alt"></i> Delete
                       </a>
                     </td>
                   </tr>
