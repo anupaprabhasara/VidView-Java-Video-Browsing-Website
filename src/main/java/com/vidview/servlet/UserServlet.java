@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet("/admin/users")
+@WebServlet("/admin/user")
 public class UserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private UserService userService;

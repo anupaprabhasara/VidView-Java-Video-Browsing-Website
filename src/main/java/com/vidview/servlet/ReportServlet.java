@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet("/admin/reports")
+@WebServlet("/admin/report")
 public class ReportServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ReportService reportService;

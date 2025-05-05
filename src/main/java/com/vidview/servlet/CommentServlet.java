@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet("/admin/comments")
+@WebServlet("/admin/comment")
 public class CommentServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private CommentService commentService;

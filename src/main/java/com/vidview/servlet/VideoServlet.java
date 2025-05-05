@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet("/admin/videos")
+@WebServlet("/admin/video")
 public class VideoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private VideoService videoService;
