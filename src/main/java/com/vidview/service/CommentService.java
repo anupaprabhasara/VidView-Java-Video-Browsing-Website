@@ -24,7 +24,7 @@ public class CommentService {
         return false;
     }
 
-    // Get Comment by ID (using comment_details_view)
+    // Get Comment by ID (from view)
     public Comment getComment(int id) {
         String query = "SELECT * FROM comment_details_view WHERE comment_id = ?";
         try (Connection connection = DBConnection.getConnection();
@@ -34,8 +34,6 @@ public class CommentService {
             if (rs.next()) {
                 Comment comment = new Comment();
                 comment.setCommentId(rs.getInt("comment_id"));
-                comment.setVideoId(rs.getInt("video_id"));
-                comment.setUserId(rs.getInt("user_id"));
                 comment.setContent(rs.getString("content"));
                 comment.setCommentedAt(rs.getString("commented_at"));
                 comment.setCommenter(rs.getString("commenter"));
@@ -48,7 +46,7 @@ public class CommentService {
         return null;
     }
 
-    // Get All Comments (from comment_details_view)
+    // Get All Comments (from view)
     public List<Comment> getAllComments() {
         List<Comment> comments = new ArrayList<>();
         String query = "SELECT * FROM comment_details_view ORDER BY commented_at DESC";
@@ -58,8 +56,6 @@ public class CommentService {
             while (rs.next()) {
                 Comment comment = new Comment();
                 comment.setCommentId(rs.getInt("comment_id"));
-                comment.setVideoId(rs.getInt("video_id"));
-                comment.setUserId(rs.getInt("user_id"));
                 comment.setContent(rs.getString("content"));
                 comment.setCommentedAt(rs.getString("commented_at"));
                 comment.setCommenter(rs.getString("commenter"));

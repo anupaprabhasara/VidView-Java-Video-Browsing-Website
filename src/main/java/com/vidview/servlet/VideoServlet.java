@@ -53,7 +53,7 @@ public class VideoServlet extends HttpServlet {
             } else if ("delete".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 videoService.deleteVideo(id);
-                response.sendRedirect(request.getContextPath() + "/admin/videos");
+                response.sendRedirect(request.getContextPath() + "/admin/video");
 
             } else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action.");
@@ -90,7 +90,7 @@ public class VideoServlet extends HttpServlet {
                 video.setUploadedBy(uploadedBy);
 
                 if (videoService.createVideo(video)) {
-                    response.sendRedirect(request.getContextPath() + "/admin/videos");
+                    response.sendRedirect(request.getContextPath() + "/admin/video");
                 } else {
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to create video.");
                 }
@@ -108,7 +108,7 @@ public class VideoServlet extends HttpServlet {
                 video.setYoutubeUrl(youtubeUrl);
 
                 if (videoService.updateVideo(video)) {
-                    response.sendRedirect(request.getContextPath() + "/admin/videos");
+                    response.sendRedirect(request.getContextPath() + "/admin/video");
                 } else {
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update video.");
                 }

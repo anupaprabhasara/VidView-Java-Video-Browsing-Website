@@ -37,7 +37,7 @@ public class CommentServlet extends HttpServlet {
             } else if ("delete".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 commentService.deleteComment(id);
-                response.sendRedirect(request.getContextPath() + "/admin/comments");
+                response.sendRedirect(request.getContextPath() + "/admin/comment");
 
             } else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action.");

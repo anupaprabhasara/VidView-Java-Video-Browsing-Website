@@ -37,7 +37,7 @@ public class ReportServlet extends HttpServlet {
             } else if ("delete".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 reportService.deleteReport(id);
-                response.sendRedirect(request.getContextPath() + "/admin/reports");
+                response.sendRedirect(request.getContextPath() + "/admin/report");
 
             } else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action.");

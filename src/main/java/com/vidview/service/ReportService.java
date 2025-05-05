@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReportService {
 
-    // Create Report (Insert into base table, not the view)
+    // Create Report (insert into base table)
     public boolean createReport(Report report) {
         String query = "INSERT INTO reports (video_id, user_id, reason) VALUES (?, ?, ?)";
         try (Connection connection = DBConnection.getConnection();
@@ -34,8 +34,6 @@ public class ReportService {
             if (rs.next()) {
                 Report report = new Report();
                 report.setReportId(rs.getInt("report_id"));
-                report.setVideoId(rs.getInt("video_id"));
-                report.setUserId(rs.getInt("user_id"));
                 report.setReason(rs.getString("reason"));
                 report.setReportedAt(rs.getString("reported_at"));
                 report.setVideoTitle(rs.getString("video_title"));
@@ -48,7 +46,7 @@ public class ReportService {
         return null;
     }
 
-    // Get All Reports (from view)
+    // Get all reports (from view)
     public List<Report> getAllReports() {
         List<Report> reports = new ArrayList<>();
         String query = "SELECT * FROM report_details_view ORDER BY reported_at DESC";
@@ -58,8 +56,6 @@ public class ReportService {
             while (rs.next()) {
                 Report report = new Report();
                 report.setReportId(rs.getInt("report_id"));
-                report.setVideoId(rs.getInt("video_id"));
-                report.setUserId(rs.getInt("user_id"));
                 report.setReason(rs.getString("reason"));
                 report.setReportedAt(rs.getString("reported_at"));
                 report.setVideoTitle(rs.getString("video_title"));
@@ -72,7 +68,7 @@ public class ReportService {
         return reports;
     }
 
-    // Delete Report (still targets base table)
+    // Delete report by ID (on base table)
     public boolean deleteReport(int id) {
         String query = "DELETE FROM reports WHERE report_id = ?";
         try (Connection connection = DBConnection.getConnection();

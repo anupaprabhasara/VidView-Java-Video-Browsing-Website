@@ -53,7 +53,7 @@ public class UserServlet extends HttpServlet {
             } else if ("delete".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 userService.deleteUser(id);
-                response.sendRedirect(request.getContextPath() + "/admin/users");
+                response.sendRedirect(request.getContextPath() + "/admin/user");
 
             } else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action.");
@@ -88,7 +88,7 @@ public class UserServlet extends HttpServlet {
                 user.setPassword(password);
 
                 if (userService.createUser(user)) {
-                    response.sendRedirect(request.getContextPath() + "/admin/users");
+                    response.sendRedirect(request.getContextPath() + "/admin/user");
                 } else {
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to create user.");
                 }
@@ -106,7 +106,7 @@ public class UserServlet extends HttpServlet {
                 user.setPassword(password);
 
                 if (userService.updateUser(user)) {
-                    response.sendRedirect(request.getContextPath() + "/admin/users");
+                    response.sendRedirect(request.getContextPath() + "/admin/user");
                 } else {
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update user.");
                 }
