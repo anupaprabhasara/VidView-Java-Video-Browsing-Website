@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CommentService {
 
-    // Create Comment
+    // Create Comment (base table)
     public boolean createComment(Comment comment) {
         String query = "INSERT INTO comments (video_id, user_id, content) VALUES (?, ?, ?)";
         try (Connection connection = DBConnection.getConnection();
@@ -24,9 +24,9 @@ public class CommentService {
         return false;
     }
 
-    // Get Comment by ID
+    // Get Comment by ID (using comment_details_view)
     public Comment getComment(int id) {
-        String query = "SELECT * FROM comments WHERE comment_id = ?";
+        String query = "SELECT * FROM comment_details_view WHERE comment_id = ?";
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
@@ -38,6 +38,8 @@ public class CommentService {
                 comment.setUserId(rs.getInt("user_id"));
                 comment.setContent(rs.getString("content"));
                 comment.setCommentedAt(rs.getString("commented_at"));
+                comment.setCommenter(rs.getString("commenter"));
+                comment.setVideoTitle(rs.getString("video_title"));
                 return comment;
             }
         } catch (SQLException e) {
@@ -46,10 +48,10 @@ public class CommentService {
         return null;
     }
 
-    // Get All Comments
+    // Get All Comments (from comment_details_view)
     public List<Comment> getAllComments() {
         List<Comment> comments = new ArrayList<>();
-        String query = "SELECT * FROM comments ORDER BY commented_at DESC";
+        String query = "SELECT * FROM comment_details_view ORDER BY commented_at DESC";
         try (Connection connection = DBConnection.getConnection();
              Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
@@ -60,6 +62,8 @@ public class CommentService {
                 comment.setUserId(rs.getInt("user_id"));
                 comment.setContent(rs.getString("content"));
                 comment.setCommentedAt(rs.getString("commented_at"));
+                comment.setCommenter(rs.getString("commenter"));
+                comment.setVideoTitle(rs.getString("video_title"));
                 comments.add(comment);
             }
         } catch (SQLException e) {
@@ -68,7 +72,7 @@ public class CommentService {
         return comments;
     }
 
-    // Update Comment
+    // Update Comment (base table)
     public boolean updateComment(Comment comment) {
         String query = "UPDATE comments SET content = ? WHERE comment_id = ?";
         try (Connection connection = DBConnection.getConnection();
@@ -82,7 +86,7 @@ public class CommentService {
         return false;
     }
 
-    // Delete Comment
+    // Delete Comment (base table)
     public boolean deleteComment(int id) {
         String query = "DELETE FROM comments WHERE comment_id = ?";
         try (Connection connection = DBConnection.getConnection();

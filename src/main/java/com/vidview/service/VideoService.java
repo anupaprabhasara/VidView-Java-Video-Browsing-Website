@@ -9,7 +9,7 @@ import java.util.List;
 
 public class VideoService {
 
-    // Create Video
+    // Create Video (base table only)
     public boolean createVideo(Video video) {
         String query = "INSERT INTO videos (title, description, youtube_url, uploaded_by) VALUES (?, ?, ?, ?)";
         try (Connection connection = DBConnection.getConnection();
@@ -25,9 +25,9 @@ public class VideoService {
         return false;
     }
 
-    // Get Video by ID
+    // Get Video by ID (using video_details_view)
     public Video getVideo(int id) {
-        String query = "SELECT * FROM videos WHERE video_id = ?";
+        String query = "SELECT * FROM video_details_view WHERE video_id = ?";
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
@@ -38,8 +38,9 @@ public class VideoService {
                 video.setTitle(rs.getString("title"));
                 video.setDescription(rs.getString("description"));
                 video.setYoutubeUrl(rs.getString("youtube_url"));
-                video.setUploadedBy(rs.getInt("uploaded_by"));
+                video.setUploadedByName(rs.getString("uploaded_by"));
                 video.setUploadedAt(rs.getString("uploaded_at"));
+                video.setTotalComments(rs.getInt("total_comments"));
                 return video;
             }
         } catch (SQLException e) {
@@ -48,10 +49,10 @@ public class VideoService {
         return null;
     }
 
-    // Get All Videos
+    // Get All Videos (using video_details_view)
     public List<Video> getAllVideos() {
         List<Video> videos = new ArrayList<>();
-        String query = "SELECT * FROM videos ORDER BY uploaded_at DESC";
+        String query = "SELECT * FROM video_details_view ORDER BY uploaded_at DESC";
         try (Connection connection = DBConnection.getConnection();
              Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
@@ -61,8 +62,9 @@ public class VideoService {
                 video.setTitle(rs.getString("title"));
                 video.setDescription(rs.getString("description"));
                 video.setYoutubeUrl(rs.getString("youtube_url"));
-                video.setUploadedBy(rs.getInt("uploaded_by"));
+                video.setUploadedByName(rs.getString("uploaded_by"));
                 video.setUploadedAt(rs.getString("uploaded_at"));
+                video.setTotalComments(rs.getInt("total_comments"));
                 videos.add(video);
             }
         } catch (SQLException e) {
@@ -71,7 +73,7 @@ public class VideoService {
         return videos;
     }
 
-    // Update Video
+    // Update Video (base table only)
     public boolean updateVideo(Video video) {
         String query = "UPDATE videos SET title = ?, description = ?, youtube_url = ? WHERE video_id = ?";
         try (Connection connection = DBConnection.getConnection();

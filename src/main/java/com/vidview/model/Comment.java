@@ -7,6 +7,9 @@ public class Comment {
     private String content;
     private String commentedAt;
     
+    private String commenter; // View
+    private String videoTitle; // View
+    
 	public int getCommentId() {
 		return commentId;
 	}
@@ -22,6 +25,12 @@ public class Comment {
 	public String getCommentedAt() {
 		return commentedAt;
 	}
+	public String getCommenter() {
+		return commenter;
+	}
+	public String getVideoTitle() {
+		return videoTitle;
+	}
 	public void setCommentId(int commentId) {
 		this.commentId = commentId;
 	}
@@ -36,5 +45,11 @@ public class Comment {
 	}
 	public void setCommentedAt(String commentedAt) {
 		this.commentedAt = commentedAt;
+	}
+	public void setCommenter(String commenter) {
+		this.commenter = commenter;
+	}
+	public void setVideoTitle(String videoTitle) {
+		this.videoTitle = videoTitle;
 	}
 }

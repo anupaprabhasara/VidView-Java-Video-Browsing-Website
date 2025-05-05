@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReportService {
 
-    // Create Report
+    // Create Report (Insert into base table, not the view)
     public boolean createReport(Report report) {
         String query = "INSERT INTO reports (video_id, user_id, reason) VALUES (?, ?, ?)";
         try (Connection connection = DBConnection.getConnection();
@@ -24,9 +24,9 @@ public class ReportService {
         return false;
     }
 
-    // Get Report by ID
+    // Get Report by ID (from view)
     public Report getReport(int id) {
-        String query = "SELECT * FROM reports WHERE report_id = ?";
+        String query = "SELECT * FROM report_details_view WHERE report_id = ?";
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
@@ -38,6 +38,8 @@ public class ReportService {
                 report.setUserId(rs.getInt("user_id"));
                 report.setReason(rs.getString("reason"));
                 report.setReportedAt(rs.getString("reported_at"));
+                report.setVideoTitle(rs.getString("video_title"));
+                report.setReportedBy(rs.getString("reported_by"));
                 return report;
             }
         } catch (SQLException e) {
@@ -46,10 +48,10 @@ public class ReportService {
         return null;
     }
 
-    // Get All Reports
+    // Get All Reports (from view)
     public List<Report> getAllReports() {
         List<Report> reports = new ArrayList<>();
-        String query = "SELECT * FROM reports ORDER BY reported_at DESC";
+        String query = "SELECT * FROM report_details_view ORDER BY reported_at DESC";
         try (Connection connection = DBConnection.getConnection();
              Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
@@ -60,6 +62,8 @@ public class ReportService {
                 report.setUserId(rs.getInt("user_id"));
                 report.setReason(rs.getString("reason"));
                 report.setReportedAt(rs.getString("reported_at"));
+                report.setVideoTitle(rs.getString("video_title"));
+                report.setReportedBy(rs.getString("reported_by"));
                 reports.add(report);
             }
         } catch (SQLException e) {
@@ -68,7 +72,7 @@ public class ReportService {
         return reports;
     }
 
-    // Delete Report
+    // Delete Report (still targets base table)
     public boolean deleteReport(int id) {
         String query = "DELETE FROM reports WHERE report_id = ?";
         try (Connection connection = DBConnection.getConnection();

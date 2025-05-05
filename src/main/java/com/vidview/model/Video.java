@@ -8,6 +8,9 @@ public class Video {
     private int uploadedBy;
     private String uploadedAt;
     
+    private String uploadedByName; // View
+    private int totalComments; // View
+    
 	public int getVideoId() {
 		return videoId;
 	}
@@ -26,6 +29,12 @@ public class Video {
 	public String getUploadedAt() {
 		return uploadedAt;
 	}
+	public String getUploadedByName() {
+		return uploadedByName;
+	}
+	public int getTotalComments() {
+		return totalComments;
+	}
 	public void setVideoId(int videoId) {
 		this.videoId = videoId;
 	}
@@ -43,5 +52,11 @@ public class Video {
 	}
 	public void setUploadedAt(String uploadedAt) {
 		this.uploadedAt = uploadedAt;
+	}
+	public void setUploadedByName(String uploadedByName) {
+		this.uploadedByName = uploadedByName;
+	}
+	public void setTotalComments(int totalComments) {
+		this.totalComments = totalComments;
 	}
 }

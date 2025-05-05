@@ -7,6 +7,9 @@ public class Report {
     private String reason;
     private String reportedAt;
     
+    private String videoTitle; // View
+    private String reportedBy; // View
+    
 	public int getReportId() {
 		return reportId;
 	}
@@ -22,6 +25,12 @@ public class Report {
 	public String getReportedAt() {
 		return reportedAt;
 	}
+	public String getVideoTitle() {
+		return videoTitle;
+	}
+	public String getReportedBy() {
+		return reportedBy;
+	}
 	public void setReportId(int reportId) {
 		this.reportId = reportId;
 	}
@@ -36,5 +45,11 @@ public class Report {
 	}
 	public void setReportedAt(String reportedAt) {
 		this.reportedAt = reportedAt;
+	}
+	public void setVideoTitle(String videoTitle) {
+		this.videoTitle = videoTitle;
+	}
+	public void setReportedBy(String reportedBy) {
+		this.reportedBy = reportedBy;
 	}
 }
